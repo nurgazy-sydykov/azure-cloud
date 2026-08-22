@@ -1,0 +1,6 @@
+rg_name              = "cmaz-3o15j4kj-mod3-rg"
+storageaccount_name  = "cmaz3o15j4kjsa"
+vnet_name            = "cmaz-3o15j4kj-mod3-vnet"
+subnet1_name         = "frontend"
+subnet2_name         = "backend"
+student_email        = "nurgazy_sydykov"
