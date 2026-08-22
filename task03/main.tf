@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
   name     = var.rg_name
-  location = "East US"
+  location = var.rg_location
 
   tags = {
     Creator = var.student_email
