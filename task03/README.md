@@ -17,7 +17,7 @@ Deploy a complete Azure infrastructure using Terraform, including Resource Group
 | Subnet 1 (Frontend) | `***` |
 | Subnet 2 (Backend) | `***` |
 | Location | `***` |
-| Tag: Creator | `nurgazy_sydykov@epam.com` |
+| Tag: Creator | `***` |
 
 ---
 
@@ -25,23 +25,23 @@ Deploy a complete Azure infrastructure using Terraform, including Resource Group
 
 ```
 task03/
-├── main.tf              # Azure resource definitions (RG, Storage, VNet, Subnets)
-├── variables.tf         # Variable declarations with descriptions and types
-├── terraform.tfvars     # Variable values (resource names, location, email)
-├── outputs.tf           # Output definitions (RG ID, Storage endpoint, VNet ID)
-├── versions.tf          # Terraform version & Azure provider requirements
-└── README.md            # This file
+├── main.tf
+├── variables.tf
+├── terraform.tfvars
+├── outputs.tf
+├── versions.tf
+└── README.md
 ```
 
 ### File Descriptions
 
 | File | Purpose |
 |------|---------|
-| **main.tf** | Defines all Azure resources: Resource Group, Storage Account, Virtual Network, and 2 Subnets |
-| **variables.tf** | Declares all input variables (rg_name, rg_location, storageaccount_name, vnet_name, subnet names, student_email) |
-| **terraform.tfvars** | Provides actual values for variables (resource names, location, tags) |
-| **outputs.tf** | Specifies outputs to display: RG ID, Storage blob endpoint, VNet ID |
-| **versions.tf** | Sets Terraform >= 1.5.7 and Azure provider >= 3.110.0, < 4.0.0 |
+| **main.tf** | Contains all Azure resource definitions including Resource Group, Storage Account with Standard LRS configuration, Virtual Network with specified address space, and two Subnets (frontend and backend) with their respective address prefixes. All resources are configured with tags for tracking and management. |
+| **variables.tf** | Defines all input variables required for the infrastructure deployment. Each variable includes a description and type definition. Variables declared: rg_name, rg_location, storageaccount_name, vnet_name, subnet1_name, subnet2_name, and student_email. No default values are set, requiring explicit values in terraform.tfvars. |
+| **terraform.tfvars** | Provides the actual values for all variables defined in variables.tf. Contains the specific resource names, Azure region location, and student email for tagging purposes. This file should be customized with your own values before deployment. |
+| **outputs.tf** | Defines output values that will be displayed after successful deployment. Includes Resource Group ID, Storage Account blob service primary endpoint URL, and Virtual Network ID. Each output includes a description for clarity. |
+| **versions.tf** | Specifies Terraform version requirements (>= 1.5.7) and Azure provider version constraints (>= 3.110.0, < 4.0.0). Contains Azure provider configuration block. Ensures compatibility and predictable behavior across different environments. |
 
 ---
 
@@ -136,13 +136,6 @@ Create actual Azure resources:
 terraform apply tfplan
 ```
 
-**This will:**
-- Create Resource Group
-- Create Storage Account with LRS replication
-- Create Virtual Network
-- Create two Subnets (frontend & backend)
-- Apply tag: `Creator = nurgazy_sydykov@epam.com`
-
 ### Step 7: View Outputs
 
 Display deployment results:
@@ -180,40 +173,21 @@ All resources in the resource group will be deleted:
 
 ### Resources Created
 
-After successful deployment, the following resources exist in Azure:
-
-#### 1. **Resource Group**
-- Location: East US
-- Tag: `Creator = nurgazy_sydykov@epam.com`
-
-#### 2. **Storage Account**
-- Type: Standard LRS (Locally Redundant Storage)
-- Location: East US (inherited from RG)
-- Tag: `Creator = nurgazy_sydykov@epam.com`
-
-#### 3. **Virtual Network**
-- Address Space: 10.0.0.0/16
-- Location: East US (inherited from RG)
-- Tag: `Creator = nurgazy_sydykov@epam.com`
-
-#### 4. **Subnets**
-Two subnet resources:
-
-**Subnet 1: Frontend**
-- Address Prefix: 10.0.1.0/24
-- Parent VNet: Virtual Network created above
-
-**Subnet 2: Backend**
-- Address Prefix: 10.0.2.0/24
-- Parent VNet: Virtual Network created above
+| Resource Type | Name | Details |
+|---|---|---|
+| **Resource Group** | `***` | Location: `***`, Tag: Creator = `***` |
+| **Storage Account** | `***` | Type: Standard LRS, Location: `***` (inherited from RG), Tag: Creator = `***` |
+| **Virtual Network** | `***` | Address Space: `***`, Location: `***` (inherited from RG), Tag: Creator = `***` |
+| **Subnet 1** | `***` | Address Prefix: `***`, Parent VNet: `***` |
+| **Subnet 2** | `***` | Address Prefix: `***`, Parent VNet: `***` |
 
 ### Terraform Outputs
 
-```
-rg_id = "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}"
-sa_blob_endpoint = "https://{storage-account-name}.blob.core.windows.net/"
-vnet_id = "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/virtualNetworks/{vnet-name}"
-```
+| Output | Value |
+|---|---|
+| `rg_id` | `***` |
+| `sa_blob_endpoint` | `***` |
+| `vnet_id` | `***` |
 
 ---
 
