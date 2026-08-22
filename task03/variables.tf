@@ -3,6 +3,11 @@ variable "rg_name" {
   type        = string
 }
 
+variable "rg_location" {
+  description = "Location of the resource group"
+  type        = string
+}
+
 variable "storageaccount_name" {
   description = "Name of the storage account"
   type        = string
