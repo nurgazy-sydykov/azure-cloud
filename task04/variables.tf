@@ -95,6 +95,10 @@ variable "vm_os_sku" {
   default     = "20_04-lts"
 }
 
+variable "ip_configuration_name" {
+  description = "IP configuration name for NIC"
+  type        = string
+}
 variable "vm_os_version" {
   description = "Image version for the VM (use \"latest\" by default)"
   type        = string
