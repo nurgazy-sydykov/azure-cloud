@@ -1,33 +1,27 @@
-# DevOps Azure Cloud Specialization [CRE - 07]
+# Task 04 - Azure VM with Nginx (Terraform)
 
-This repository documents the learning path, exercises, and supporting resources for the **DevOps Azure Cloud Specialization** course. It is designed to help learners build practical skills in cloud infrastructure, automation, and DevOps practices using Microsoft Azure.
+This directory contains Terraform configuration to create an Azure Linux Virtual Machine with a public IP and install Nginx using a remote-exec provisioner.
 
----
+Files created in task04/
+- versions.tf     - provider and terraform version constraints
+- variables.tf    - all input variables (types and descriptions)
+- terraform.tfvars - non-sensitive input values and the admin password (sensitive)
+- main.tf         - resource definitions
+- outputs.tf      - outputs (vm_public_ip and vm_fqdn)
 
-## 📚 Course Overview
-- **Platform:** EPAM Learn
-- **Module:** [Specialization] DevOps Azure Cloud [CRE - 07]
-- **Focus Areas:**
-  - Azure Resource Manager (ARM)
-  - Networking and IP Subnetting
-  - Infrastructure automation
-  - Cloud-native task execution
-  - GitHub integration for DevOps workflows
+How to use
+1. Authenticate to Azure (for example `az login`).
+2. Switch to this branch and directory:
+   git checkout task04
+   cd task04
+3. Initialize Terraform:
+   terraform init
+4. Validate and plan:
+   terraform plan
+5. Apply:
+   terraform apply
 
----
-
-## 🔑 Key Resources
-- **Courseware:** [EPAM Learn Path](https://learn.epam.com/myLearning/path?rootId=47313762&tab=COURSEWARE)
-- **Azure Portal:** [Microsoft Azure Resource Manager](https://portal.azure.com)
-- **Networking Tool:** [IP Subnet Calculator](https://www.calculator.net/ip-subnet-calculator.html)
-- **Mentor Tasks:** [Cloud Mentor Task Portal](https://xqut4hvd5ojwjlsa4bfg5cielm0hygsw.lambda-url.eu-central-1.on.aws/v1/home)
-- **GitHub Copilot Example:** [Create Directory and Scripts for Azure](https://github.com/copilot/c/27e2e25a-5906-4d33-8583-84023925cdde)
-- **Project Repository:** [DevOps Azure Cloud - Task021](https://github.com/nurgazy-sydykov/devops-azure-cloud/tree/task021)
-
----
-
-## 🛠️ Setup Instructions
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/nurgazy-sydykov/devops-azure-cloud.git
-   cd devops-azure-cloud
+Notes
+- The file terraform.tfvars in this commit contains the admin password as requested. If you prefer not to store the password in the repo, remove it and enter it interactively when running `terraform apply`.
+- Ensure the `domain_name_label` in terraform.tfvars is unique across Azure (it forms part of the public IP FQDN).
+- This configuration intentionally does not configure a remote backend (per task requirement).
