@@ -14,9 +14,6 @@ vm_SKU            = "Standard_B2s_v2"
 admin_username    = "azureuser"
 student_email     = "nurgazy_sydykov@epam.com"
 
-# VM admin password (sensitive) - provided earlier
-vm_password = "ps2kB%ED34MeqZF7"
-
 # Image SKU/version
 vm_os_publisher = "Canonical"
 vm_os_offer     = "ubuntu-24_04-lts"
