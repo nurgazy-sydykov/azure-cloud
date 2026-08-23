@@ -46,7 +46,7 @@ variable "public_ip" {
 
 variable "domain_name_label" {
   description = "DNS name label for the public IP (will form FQDN)"
-  type = string
+  type        = string
 }
 
 variable "vm_name" {

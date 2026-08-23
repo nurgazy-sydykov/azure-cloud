@@ -15,7 +15,7 @@ admin_username    = "azureuser"
 student_email     = "nurgazy_sydykov@epam.com"
 
 # VM admin password (sensitive) - provided earlier
-vm_password       = "ps2kB%ED34MeqZF7"
+vm_password = "ps2kB%ED34MeqZF7"
 
 # Image SKU/version
 vm_os_publisher = "Canonical"

@@ -88,8 +88,8 @@ resource "azurerm_network_interface" "nic" {
 
 # Standalone association of NIC with NSG
 resource "azurerm_network_interface_security_group_association" "nic_nsg_assoc" {
-  network_interface_id       = azurerm_network_interface.nic.id
-  network_security_group_id  = azurerm_network_security_group.nsg.id
+  network_interface_id      = azurerm_network_interface.nic.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
@@ -127,11 +127,11 @@ resource "azurerm_linux_virtual_machine" "vm" {
     ]
 
     connection {
-      type        = "ssh"
-      host        = azurerm_public_ip.public_ip.ip_address
-      user        = var.admin_username
-      password    = var.vm_password
-      timeout     = "5m"
+      type     = "ssh"
+      host     = azurerm_public_ip.public_ip.ip_address
+      user     = var.admin_username
+      password = var.vm_password
+      timeout  = "5m"
     }
   }
 }
