@@ -45,8 +45,7 @@ variable "public_ip" {
 }
 
 variable "domain_name_label" {
-  description = "DNS name label for the public IP (will form FQDN)
-  NOTE: must be unique across Azure"
+  description = "DNS name label for the public IP (will form FQDN)"
   type = string
 }
 
