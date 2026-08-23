@@ -19,6 +19,6 @@ vm_password       = "ps2kB%ED34MeqZF7"
 
 # Image SKU/version
 vm_os_publisher = "Canonical"
-vm_os_offer     = "UbuntuServer"
-vm_os_sku       = "ubuntu-24_04-lts"
+vm_os_offer     = "ubuntu-24_04-lts"
+vm_os_sku       = "ubuntu-pro"
 vm_os_version   = "latest"
