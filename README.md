@@ -1,33 +1,61 @@
-# DevOps Azure Cloud Specialization [CRE - 07]
+# Task 021 — Implementing and managing Azure Virtual Network
 
-This repository documents the learning path, exercises, and supporting resources for the **DevOps Azure Cloud Specialization** course. It is designed to help learners build practical skills in cloud infrastructure, automation, and DevOps practices using Microsoft Azure.
+Short description
+---------------
+Create two VNets and establish a VNet-to-VNet VPN gateway connection (NOT peering) using Az PowerShell.
 
----
+Useful links
+------------
+1. Introducing the Az PowerShell module: https://docs.microsoft.com/en-us/powershell/azure/new-azureps-module-az
+2. Configure a VNet-to-VNet VPN gateway connection using PowerShell: https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-vnet-vnet-rm-ps
+3. Configure a VNet-to-VNet VPN gateway connection using Azure CLI: https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-cli
+4. Paired region: https://learn.microsoft.com/en-us/azure/reliability/cross-region-replication-azure#azure-paired-regions
 
-## 📚 Course Overview
-- **Platform:** EPAM Learn
-- **Module:** [Specialization] DevOps Azure Cloud [CRE - 07]
-- **Focus Areas:**
-  - Azure Resource Manager (ARM)
-  - Networking and IP Subnetting
-  - Infrastructure automation
-  - Cloud-native task execution
-  - GitHub integration for DevOps workflows
+Task parameters
+---------------
+| Parameter | Variable |
+| Region 1 | $region1 |
+| Resource group 1 name | $rg1 |
+| Virtual network 1 name | $vnet1 |
+| Virtual network 1 address prefix | $addr1 |
+| Subnet 1 name | $frontendSubnet1 |
+| Subnet 1 address prefix | $frontendPrefix1 |
+| VPN Gateway 1 name | $gw1 |
+| VPN Gateway 1 public IP name | $pip1 |
+| VPN Gateway 1 subnet address prefix | $gwPrefix1 |
+| VPN Gateway 1-2 connection name | $conn12 |
+| Region 2 | $region2 |
+| Resource group 2 name | $rg2 |
+| Virtual network 2 name | $vnet2 |
+| Virtual network 2 address prefix | $addr2 |
+| Subnet 2 name | $frontendSubnet2 |
+| Subnet 2 address prefix | $frontendPrefix2 |
+| VPN Gateway 2 name | $gw2 |
+| VPN Gateway 2 public IP name | $pip2 |
+| VPN Gateway 2 subnet address prefix | $gwPrefix2 |
+| VPN Gateway 2-1 connection name | $conn21 |
+| Tags | $tags |
 
----
+Files structure
+---------------
+- task021/
+  - 01-variables.ps1
+  - 02-resource-groups.ps1
+  - 03-vnets.ps1
+  - 04-publicips-gateways.ps1
+  - 05-connections.ps1
+  - README.md
 
-## 🔑 Key Resources
-- **Courseware:** [EPAM Learn Path](https://learn.epam.com/myLearning/path?rootId=47313762&tab=COURSEWARE)
-- **Azure Portal:** [Microsoft Azure Resource Manager](https://portal.azure.com)
-- **Networking Tool:** [IP Subnet Calculator](https://www.calculator.net/ip-subnet-calculator.html)
-- **Mentor Tasks:** [Cloud Mentor Task Portal](https://xqut4hvd5ojwjlsa4bfg5cielm0hygsw.lambda-url.eu-central-1.on.aws/v1/home)
-- **GitHub Copilot Example:** [Create Directory and Scripts for Azure](https://github.com/copilot/c/27e2e25a-5906-4d33-8583-84023925cdde)
-- **Project Repository:** [DevOps Azure Cloud - Task021](https://github.com/nurgazy-sydykov/devops-azure-cloud/tree/task021)
+Execution (compact)
+-------------------
+1. Authenticate to Azure and select subscription: Connect-AzAccount; Set-AzContext -Subscription $subId
+2. From repo root run (in order):
+   - pwsh ./task021/02-resource-groups.ps1
+   - pwsh ./task021/03-vnets.ps1
+   - pwsh ./task021/04-publicips-gateways.ps1
+   - pwsh ./task021/05-connections.ps1
 
----
-
-## 🛠️ Setup Instructions
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/nurgazy-sydykov/devops-azure-cloud.git
-   cd devops-azure-cloud
+Notes
+-----
+- Do NOT use the Azure Portal; use Az PowerShell or Azure CLI only.
+- Scripts dot-source 01-variables.ps1 so they can be run separately.
