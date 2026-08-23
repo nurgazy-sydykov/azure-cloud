@@ -1,18 +1,24 @@
-# Non-sensitive values and required names for the task
-rg_name           = "rg-task04"
+# Updated task parameters per user request
+rg_name           = "cmaz-3o15j4kj-mod4-rg"
 location          = "eastus"
-vnet_name         = "vnet-task04"
-subnet_name       = "subnet-task04"
-nic_name          = "nic-task04"
-nsg_name          = "nsg-task04"
-nsg_rule_http     = "allow-http"
-nsg_rule_ssh      = "allow-ssh"
-public_ip         = "pip-task04"
-domain_name_label = "task04-nginx-nurgazy-sydykov"
-vm_name           = "vm-task04"
-vm_SKU            = "Standard_B1s"
+vnet_name         = "cmaz-3o15j4kj-mod4-vnet"
+subnet_name       = "frontend"
+nic_name          = "cmaz-3o15j4kj-mod4-nic"
+nsg_name          = "cmaz-3o15j4kj-mod4-nsg"
+nsg_rule_http     = "AllowHTTP"
+nsg_rule_ssh      = "AllowSSH"
+public_ip         = "cmaz-3o15j4kj-mod4-pip"
+domain_name_label = "cmaz-3o15j4kj-mod4-nginx"
+vm_name           = "cmaz-3o15j4kj-mod4-vm"
+vm_SKU            = "Standard_B2s_v2"
 admin_username    = "azureuser"
-student_email     = "nurgazy-sydykov"
+student_email     = "nurgazy_sydykov@epam.com"
 
-# VM admin password (sensitive) - provided per your instruction
+# VM admin password (sensitive) - provided earlier
 vm_password       = "dNghnm2ZUIn2BgNg"
+
+# Image SKU/version
+vm_os_publisher = "Canonical"
+vm_os_offer     = "UbuntuServer"
+vm_os_sku       = "ubuntu-24_04-lts"
+vm_os_version   = "latest"
