@@ -13,6 +13,7 @@ vm_name           = "cmaz-3o15j4kj-mod4-vm"
 vm_SKU            = "Standard_B2s_v2"
 admin_username    = "azureuser"
 student_email     = "nurgazy_sydykov@epam.com"
+ip_configuration_name = "internal"
 
 # Image SKU/version
 vm_os_publisher = "Canonical"
