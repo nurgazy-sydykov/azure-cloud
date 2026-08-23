@@ -1,123 +1,195 @@
-# Task 04 - Azure VM with Nginx (Terraform)
+# Task 03 - Azure Infrastructure with Terraform
 
-## Description
+Deploy a complete Azure infrastructure using Terraform, including Resource Group, Storage Account, Virtual Network, and two Subnets.
 
-Terraform configuration to provision an Azure Linux Virtual Machine with a public IP and install Nginx using a remote-exec provisioner. The configuration follows the task requirements: standalone subnet and NSG rules, standalone NIC↔NSG association, password-based SSH for the provisioner, provider/version constraints, and outputs for verification.
+**Executed by:** nurgazy_sydykov@epam.com
 
-## Project parameters
+---
+
+## 📋 Project Parameters
 
 | Parameter | Value |
-|---|---|
-| Resource group name | cmaz-3o15j4kj-mod4-rg |
-| Virtual network name | cmaz-3o15j4kj-mod4-vnet |
-| Subnet name | frontend |
-| Network interface name | cmaz-3o15j4kj-mod4-nic |
-| Network security group name | cmaz-3o15j4kj-mod4-nsg |
-| NSG inbound HTTP rule | AllowHTTP |
-| NSG inbound SSH rule | AllowSSH |
-| Public IP name | cmaz-3o15j4kj-mod4-pip |
-| DNS name label | cmaz-3o15j4kj-mod4-nginx |
-| VM name | cmaz-3o15j4kj-mod4-vm |
-| VM OS version (SKU) | ubuntu-24_04-lts |
-| VM size | Standard_B2s_v2 |
-| Tag Creator | nurgazy_sydykov@epam.com |
+|-----------|-------|
+| Resource Group Name | `***` |
+| Storage Account Name | `***` |
+| Virtual Network Name | `***` |
+| VNet Address Space | `***` |
+| Subnet 1 (Frontend) | `***` |
+| Subnet 2 (Backend) | `***` |
+| Location | `***` |
+| Tag: Creator | `***` |
 
-## Repository file structure (root view)
+---
 
-.
-├── README.md (this file)
-└── task04/
-    ├── versions.tf
-    ├── variables.tf
-    ├── terraform.tfvars
-    ├── main.tf
-    └── outputs.tf
+## 📁 File Structure
 
-## File descriptions
+```
+task03/
+├── main.tf
+├── variables.tf
+├── terraform.tfvars
+├── outputs.tf
+├── versions.tf
+└── README.md
+```
+
+### File Descriptions
 
 | File | Purpose |
-|---|---|
-| versions.tf | Pins Terraform required_version (>= 1.5.7) and azurerm provider versions (>= 3.110.0, < 4.0.0). |
-| variables.tf | Declares all input variables used by the configuration. `vm_password` is marked sensitive. |
-| terraform.tfvars | Provides non-sensitive variable values and (currently) the `vm_password`. Remove the password line if you do not want credentials in the repo. |
-| main.tf | Defines Azure resources: Resource Group, Virtual Network, standalone Subnet, Public IP, Network Security Group, standalone NSG rules, Network Interface, NIC→NSG association (standalone), and the Linux VM. Includes a `remote-exec` provisioner to install and start Nginx. |
-| outputs.tf | Declares outputs `vm_public_ip` and `vm_fqdn` (with descriptions) used to verify deployment. |
+|------|---------|
+| **main.tf** | Contains all Azure resource definitions including Resource Group, Storage Account with Standard LRS configuration, Virtual Network with specified address space, and two Subnets (frontend and backend) with their respective address prefixes. All resources are configured with tags for tracking and management. |
+| **variables.tf** | Defines all input variables required for the infrastructure deployment. Each variable includes a description and type definition. Variables declared: rg_name, rg_location, storageaccount_name, vnet_name, subnet1_name, subnet2_name, and student_email. No default values are set, requiring explicit values in terraform.tfvars. |
+| **terraform.tfvars** | Provides the actual values for all variables defined in variables.tf. Contains the specific resource names, Azure region location, and student email for tagging purposes. This file should be customized with your own values before deployment. |
+| **outputs.tf** | Defines output values that will be displayed after successful deployment. Includes Resource Group ID, Storage Account blob service primary endpoint URL, and Virtual Network ID. Each output includes a description for clarity. |
+| **versions.tf** | Specifies Terraform version requirements (>= 1.5.7) and Azure provider version constraints (>= 3.110.0, < 4.0.0). Contains Azure provider configuration block. Ensures compatibility and predictable behavior across different environments. |
 
-## Prerequisites / Verify installation
+---
 
-- Terraform CLI >= 1.5.7
-  - Verify: `terraform version`
-- Azure CLI
-  - Verify: `az version`
-- An SSH client (ssh)
-  - Verify: `ssh -V`
-- Network: ensure your IP can reach port 22 on the VM (NSG currently allows 0.0.0.0/0 for SSH per task requirements).
+## 🚀 Prerequisites
 
-## Azure CLI sign-in
+Install the following tools:
+
+- **Azure CLI** - [Install here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- **Terraform** - [Install here](https://www.terraform.io/)
+- **Git** - [Install here](https://git-scm.com/)
+
+Verify installations:
 
 ```bash
+az version
+terraform version
+git --version
+```
+
+---
+
+## 🔑 Azure CLI Sign In
+
+Before deploying, authenticate with Azure:
+
+```bash
+# Login to Azure (opens browser)
 az login
-# (optional) set subscription
-az account set --subscription "<SUBSCRIPTION_ID_OR_NAME>"
+
+# Verify you're logged in and see your subscription
+az account show
+
+# List all subscriptions (if you have multiple)
+az account list
+
+# Set active subscription (if needed)
+az account set --subscription "<subscription-id>"
 ```
 
-## Step-by-step deployment (copyable commands)
+---
 
-1) Checkout branch and change directory
+## 📝 Step-by-Step Deployment
+
+### Step 1: Navigate to Task Directory
 
 ```bash
-git fetch origin
-git checkout task04
-cd task04
+cd task03
 ```
 
-2) Initialize Terraform
+### Step 2: Initialize Terraform
+
+Downloads Azure provider and prepares working directory:
 
 ```bash
 terraform init
 ```
 
-3) Validate configuration (optional)
+### Step 3: Validate Configuration
+
+Checks syntax and configuration correctness:
 
 ```bash
 terraform validate
 ```
 
-4) Review plan
+### Step 4: Format Check (Optional)
+
+Ensures code follows Terraform standards:
 
 ```bash
-terraform plan -out plan.tfplan
+terraform fmt -check
 ```
 
-5) Apply the plan
+### Step 5: Plan Deployment
+
+Preview all changes before applying:
 
 ```bash
-terraform apply "plan.tfplan"
-# or
-terraform apply
+terraform plan -out=tfplan
 ```
 
-6) Get outputs after apply completes
+**Output shows:**
+- Resources to be created
+- Resource properties
+- Tags to be applied
+
+### Step 6: Apply Configuration
+
+Create actual Azure resources:
 
 ```bash
-terraform output vm_public_ip
-terraform output vm_fqdn
+terraform apply tfplan
 ```
 
-## Deployment verification
+### Step 7: View Outputs
 
-- Nginx home page (open in a browser):
-  - `http://<vm_public_ip>` or `http://<vm_fqdn>`
-- SSH into VM (password auth):
+Display deployment results:
 
 ```bash
-ssh azureuser@<vm_public_ip>
-# enter the admin password provided in terraform.tfvars
+terraform output
 ```
 
-## Security recommendations
+**Expected outputs:**
+- `rg_id` - Resource Group ID
+- `sa_blob_endpoint` - Storage Account blob service URL
+- `vnet_id` - Virtual Network ID
 
-- Remove the admin password from `terraform.tfvars` and use interactive input or a secrets manager for sensitive values.
-- Prefer SSH public key authentication (`admin_ssh_key`) over password-based authentication for the VM.
-- Restrict the NSG SSH rule to your specific IP/CIDR rather than 0.0.0.0/0.
+---
 
+## 🗑️ Destroy Resources
+
+Remove all Azure resources created by Terraform:
+
+```bash
+terraform destroy
+```
+
+**Confirmation:** Type `yes` when prompted to confirm deletion
+
+All resources in the resource group will be deleted:
+- ✅ Storage Account deleted
+- ✅ Virtual Network deleted
+- ✅ Subnets deleted
+- ✅ Resource Group deleted
+
+---
+
+## 📊 Deployment Results
+
+### Resources Created
+
+| Resource Type | Name | Details |
+|---|---|---|
+| **Resource Group** | `***` | Location: `***`, Tag: Creator = `***` |
+| **Storage Account** | `***` | Type: Standard LRS, Location: `***` (inherited from RG), Tag: Creator = `***` |
+| **Virtual Network** | `***` | Address Space: `***`, Location: `***` (inherited from RG), Tag: Creator = `***` |
+| **Subnet 1** | `***` | Address Prefix: `***`, Parent VNet: `***` |
+| **Subnet 2** | `***` | Address Prefix: `***`, Parent VNet: `***` |
+
+### Terraform Outputs
+
+| Output | Value |
+|---|---|
+| `rg_id` | `***` |
+| `sa_blob_endpoint` | `***` |
+| `vnet_id` | `***` |
+
+---
+
+**Last Updated:** 2026-08-23  
+**Task Executor:** Nurgazy A. Sydykov (nurgazy_sydykov@epam.com)
