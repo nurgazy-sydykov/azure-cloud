@@ -121,9 +121,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get update -y",
-      "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nginx",
-      "sudo systemctl enable --now nginx"
+      "echo '${var.vm_password}' | sudo -S apt-get update -y",
+      "echo '${var.vm_password}' | sudo -S DEBIAN_FRONTEND=noninteractive apt-get install -y nginx",
+      "echo '${var.vm_password}' | sudo -S systemctl enable --now nginx"
     ]
 
     connection {
