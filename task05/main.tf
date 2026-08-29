@@ -57,13 +57,11 @@ module "traffic_manager" {
   endpoints = {
     app1 = {
       name     = "endpoint-app1"
-      target   = module.app["app1"].default_hostname
-      location = module.rg["rg1"].location
+      target   = module.app["app1"].id
     }
     app2 = {
       name     = "endpoint-app2"
-      target   = module.app["app2"].default_hostname
-      location = module.rg["rg2"].location
+      target   = module.app["app2"].id
     }
   }
 

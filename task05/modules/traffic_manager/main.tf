@@ -20,8 +20,7 @@ resource "azurerm_traffic_manager_profile" "this" {
 resource "azurerm_traffic_manager_azure_endpoint" "this" {
   for_each = var.endpoints
 
-  name                = each.value.name
-  profile_name        = azurerm_traffic_manager_profile.this.name
-  resource_group_name = var.resource_group_name
-  target_resource_id  = each.value.target
+  name       = each.value.name
+  profile_id = azurerm_traffic_manager_profile.this.id
+  target_resource_id = each.value.target
 }
