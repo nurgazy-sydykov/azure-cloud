@@ -109,25 +109,28 @@ terraform destroy
 ---
 
 ## 📖 Architecture Diagram
+
 ```mermaid
 graph TD
-    subgraph RG1[Resource Group 1 - West Europe]
-        ASP1[App Service Plan 1 (S1, 2 workers)]
-        APP1[Windows Web App 1]
+    subgraph RG1["Resource Group 1 - West Europe"]
+        ASP1["App Service Plan 1 - S1, 2 workers"]
+        APP1["Windows Web App 1"]
         ASP1 --> APP1
     end
 
-    subgraph RG2[Resource Group 2 - North Europe]
-        ASP2[App Service Plan 2 (S1, 1 worker)]
-        APP2[Windows Web App 2]
+    subgraph RG2["Resource Group 2 - North Europe"]
+        ASP2["App Service Plan 2 - S1, 1 worker"]
+        APP2["Windows Web App 2"]
         ASP2 --> APP2
     end
 
-    subgraph RG3[Resource Group 3 - East US]
-        TM[Traffic Manager Profile (Performance Routing)]
+    subgraph RG3["Resource Group 3 - East US"]
+        TM["Traffic Manager Profile - Performance Routing"]
     end
 
     TM --> APP1
     TM --> APP2
 ```
+
 ---
+
