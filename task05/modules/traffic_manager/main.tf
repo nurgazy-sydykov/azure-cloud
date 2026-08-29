@@ -17,13 +17,11 @@ resource "azurerm_traffic_manager_profile" "this" {
   tags = var.tags
 }
 
-resource "azurerm_traffic_manager_endpoint" "this" {
+resource "azurerm_traffic_manager_azure_endpoint" "this" {
   for_each = var.endpoints
 
   name                = each.value.name
   profile_name        = azurerm_traffic_manager_profile.this.name
   resource_group_name = var.resource_group_name
-  type                = "azureEndpoints"
-  target              = each.value.target
-  endpoint_location   = each.value.location
+  target_resource_id  = each.value.target
 }
