@@ -56,12 +56,12 @@ module "traffic_manager" {
 
   endpoints = {
     app1 = {
-      name     = "endpoint-app1"
-      target   = module.app["app1"].id
+      name   = "endpoint-app1"
+      target = module.app["app1"].id
     }
     app2 = {
-      name     = "endpoint-app2"
-      target   = module.app["app2"].id
+      name   = "endpoint-app2"
+      target = module.app["app2"].id
     }
   }
 
