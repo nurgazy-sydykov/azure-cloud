@@ -87,29 +87,29 @@ This FQDN can be used to access the highly available web solution.
 
 ## 🚀 Usage
 ```bash
-# Initialize Terraform
+# Initialize Terraform (downloads providers, sets up backend)
 terraform init
 
-# Format code
+# Format code (ensures all .tf files are clean and consistent)
 terraform fmt
 
-# Validate Terraform code
+# Validate Terraform code (checks syntax and configuration correctness)
 terraform validate
 
-# Review the plan
+# Review the plan (shows what resources will be created/changed/destroyed)
 terraform plan
 
-# Apply the configuration
+# Apply the configuration (actually provisions resources in Azure)
 terraform apply
 
-# Destroy Terraform
+# Destroy Terraform-managed resources (tears down everything created)
 terraform destroy
 ```
 
 ---
 
 ## 📖 Architecture Diagram
-
+```mermaid
 graph TD
     subgraph RG1[Resource Group 1 - West Europe]
         ASP1[App Service Plan 1 (S1, 2 workers)]
@@ -129,5 +129,5 @@ graph TD
 
     TM --> APP1
     TM --> APP2
-
+```
 ---
