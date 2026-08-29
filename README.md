@@ -73,7 +73,7 @@ Values are provided in `terraform.tfvars`.
 3. **RG3** → Traffic Manager Profile with endpoints pointing to Web App 1 and Web App 2  
 
 All resources are tagged with:
-Creator = nurgazy_sydykov@epam.com
+Creator = [***user tag***]
 
 ---
 
@@ -90,17 +90,26 @@ This FQDN can be used to access the highly available web solution.
 # Initialize Terraform
 terraform init
 
+# Format code
+terraform fmt
+
+# Validate Terraform code
+terraform validate
+
 # Review the plan
 terraform plan
 
 # Apply the configuration
 terraform apply
+
+# Destroy Terraform
+terraform destroy
 ```
 
 ---
 
 ## 📖 Architecture Diagram
-```mermaid
+
 graph TD
     subgraph RG1[Resource Group 1 - West Europe]
         ASP1[App Service Plan 1 (S1, 2 workers)]
@@ -120,6 +129,5 @@ graph TD
 
     TM --> APP1
     TM --> APP2
-```
 
 ---
