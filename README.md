@@ -14,6 +14,7 @@ The solution ensures high availability by distributing traffic across multiple r
 
 ## 🗂️ Directory Structure
 
+```
 task05/
 ├── modules/
 │   ├── app_service/          # Windows Web App module
@@ -25,6 +26,7 @@ task05/
 ├── terraform.tfvars          # Variable values
 ├── variables.tf              # Variable definitions
 └── versions.tf               # Terraform & provider versions
+```
 
 ---
 
@@ -93,10 +95,12 @@ terraform plan
 
 # Apply the configuration
 terraform apply
+```
 
 ---
 
 ## 📖 Architecture Diagram
+```mermaid
 graph TD
     subgraph RG1[Resource Group 1 - West Europe]
         ASP1[App Service Plan 1 (S1, 2 workers)]
@@ -116,3 +120,6 @@ graph TD
 
     TM --> APP1
     TM --> APP2
+```
+
+---
