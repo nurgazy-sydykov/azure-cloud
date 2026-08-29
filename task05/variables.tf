@@ -13,7 +13,7 @@ variable "app_service_plans" {
     name         = string
     sku          = string
     worker_count = number
-    rg_key       = string   # key to link with resource_groups
+    rg_key       = string # key to link with resource_groups
   }))
   description = "Map of App Service Plans"
 }
@@ -22,8 +22,8 @@ variable "app_service_plans" {
 variable "app_services" {
   type = map(object({
     name    = string
-    rg_key  = string   # key to link with resource_groups
-    asp_key = string   # key to link with app_service_plans
+    rg_key  = string # key to link with resource_groups
+    asp_key = string # key to link with app_service_plans
   }))
   description = "Map of App Services"
 }

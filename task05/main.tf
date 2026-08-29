@@ -17,12 +17,12 @@ module "asp" {
   source   = "./modules/app_service_plan"
   for_each = var.app_service_plans
 
-  name     = each.value.name
-  location = module.rg[each.value.rg_key].location
+  name                = each.value.name
+  location            = module.rg[each.value.rg_key].location
   resource_group_name = module.rg[each.value.rg_key].name
-  sku_name = each.value.sku
-  worker_count = each.value.worker_count
-  tags     = { Creator = "nurgazy_sydykov@epam.com" }
+  sku_name            = each.value.sku
+  worker_count        = each.value.worker_count
+  tags                = { Creator = "nurgazy_sydykov@epam.com" }
 }
 
 # -------------------------
@@ -32,25 +32,25 @@ module "app" {
   source   = "./modules/app_service"
   for_each = var.app_services
 
-  name     = each.value.name
-  location = module.rg[each.value.rg_key].location
+  name                = each.value.name
+  location            = module.rg[each.value.rg_key].location
   resource_group_name = module.rg[each.value.rg_key].name
   app_service_plan_id = module.asp[each.value.asp_key].id
 
-  allowed_ip        = "18.153.146.156"
+  allowed_ip          = "18.153.146.156"
   allowed_service_tag = "AzureTrafficManager"
 
-  tags     = { Creator = "nurgazy_sydykov@epam.com" }
+  tags = { Creator = "nurgazy_sydykov@epam.com" }
 }
 
 # -------------------------
 # Traffic Manager Profile
 # -------------------------
 module "traffic_manager" {
-  source   = "./modules/traffic_manager"
+  source = "./modules/traffic_manager"
 
-  name     = var.traffic_manager.name
-  location = module.rg["rg3"].location
+  name                = var.traffic_manager.name
+  location            = module.rg["rg3"].location
   resource_group_name = module.rg["rg3"].name
   routing_method      = var.traffic_manager.routing_method
 
