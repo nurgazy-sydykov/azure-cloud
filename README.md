@@ -15,17 +15,30 @@ The solution ensures high availability by distributing traffic across multiple r
 ## 🗂️ Directory Structure
 
 ```
-task05/
-├── modules/
-│   ├── app_service/          # Windows Web App module
-│   ├── app_service_plan/     # App Service Plan module
-│   ├── resource_group/       # Resource Group module
-│   └── traffic_manager/      # Traffic Manager module
-├── main.tf                   # Root orchestration
-├── outputs.tf                # Root outputs
-├── terraform.tfvars          # Variable values
-├── variables.tf              # Variable definitions
-└── versions.tf               # Terraform & provider versions
+.
+└── task05/
+    ├── modules/
+    │   ├── app_service/
+    │   │   ├── main.tf
+    │   │   ├── outputs.tf
+    │   │   └── variables.tf
+    │   ├── app_service_plan/
+    │   │   ├── main.tf
+    │   │   ├── outputs.tf
+    │   │   └── variables.tf   
+    │   ├── resource_group/
+    │   │   ├── main.tf
+    │   │   ├── outputs.tf
+    │   │   └── variables.tf
+    │   └── traffic_manager/
+    │       ├── main.tf
+    │       ├── outputs.tf
+    │       └── variables.tf
+    ├── main.tf
+    ├── outputs.tf
+    ├── terraform.tfvars
+    ├── variables.tf
+    └── versions.tf
 ```
 
 ---
