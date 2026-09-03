@@ -49,5 +49,5 @@ traffic_manager = {
 # -------------------------
 # IP Restrictions
 # -------------------------
-allowed_ip          = "18.153.146.156"
-allowed_service_tag = "AzureTrafficManager"
+#allowed_ip          = "18.153.146.156"
+#allowed_service_tag = "AzureTrafficManager"
