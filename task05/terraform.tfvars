@@ -45,3 +45,9 @@ traffic_manager = {
   name           = "cmaz-3o15j4kj-mod5-traf"
   routing_method = "Performance"
 }
+
+# -------------------------
+# IP Restrictions
+# -------------------------
+allowed_ip          = "18.153.146.156"
+allowed_service_tag = "AzureTrafficManager"

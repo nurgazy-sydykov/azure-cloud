@@ -37,8 +37,8 @@ module "app" {
   resource_group_name = module.rg[each.value.rg_key].name
   app_service_plan_id = module.asp[each.value.asp_key].id
 
-  allowed_ip          = "18.153.146.156"
-  allowed_service_tag = "AzureTrafficManager"
+  allowed_ip          = var.allowed_ip
+  allowed_service_tag = var.allowed_service_tag
 
   tags = { Creator = "nurgazy_sydykov@epam.com" }
 }
