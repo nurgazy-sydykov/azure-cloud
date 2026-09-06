@@ -51,3 +51,9 @@ traffic_manager = {
 # -------------------------
 allowed_ip          = "18.153.146.156/32"
 allowed_service_tag = "AzureTrafficManager"
+
+# -------------------------
+# Tags
+# -------------------------
+tag_key   = "Creator"
+tag_value = "nurgazy_sydykov@epam.com"

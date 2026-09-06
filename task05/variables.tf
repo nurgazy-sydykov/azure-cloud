@@ -49,3 +49,14 @@ variable "allowed_service_tag" {
   description = "Azure service tag allowed to access the App Service"
 }
 
+# Tag Key
+variable "tag_key" {
+  type        = string
+  description = "Tag key to apply to resources"
+}
+
+# Tag Value
+variable "tag_value" {
+  type        = string
+  description = "Tag value to apply to resources"
+}

@@ -7,7 +7,7 @@ module "rg" {
 
   name     = each.value.name
   location = each.value.location
-  tags     = { Creator = "nurgazy_sydykov@epam.com" }
+  tags 	   = { (var.tag_key) = var.tag_value }
 }
 
 # -------------------------
@@ -22,7 +22,7 @@ module "asp" {
   resource_group_name = module.rg[each.value.rg_key].name
   sku_name            = each.value.sku
   worker_count        = each.value.worker_count
-  tags                = { Creator = "nurgazy_sydykov@epam.com" }
+  tags 				  = { (var.tag_key) = var.tag_value }
 }
 
 # -------------------------
@@ -40,7 +40,7 @@ module "app" {
   allowed_ip          = var.allowed_ip
   allowed_service_tag = var.allowed_service_tag
 
-  tags = { Creator = "nurgazy_sydykov@epam.com" }
+  tags 				  = { (var.tag_key) = var.tag_value }
 }
 
 # -------------------------
@@ -65,5 +65,5 @@ module "traffic_manager" {
     }
   }
 
-  tags = { Creator = "nurgazy_sydykov@epam.com" }
+  tags 				  = { (var.tag_key) = var.tag_value }
 }
