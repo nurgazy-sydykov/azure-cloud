@@ -13,7 +13,7 @@ variable "resource_group_name" {
   description = "Resource group where the plan will be created"
 }
 
-variable "sku_name" {
+variable "sku" {
   type        = string
   description = "SKU name (e.g., S1)"
 }
