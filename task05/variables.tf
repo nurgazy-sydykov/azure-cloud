@@ -37,18 +37,6 @@ variable "traffic_manager" {
   description = "Traffic Manager profile configuration"
 }
 
-# Allowed IP addres
-variable "allowed_ip" {
-  type        = string
-  description = "IP address allowed to access the App Service"
-}
-
-# Allowed Service Tag
-variable "allowed_service_tag" {
-  type        = string
-  description = "Azure service tag allowed to access the App Service"
-}
-
 # Tag Key
 variable "tag_key" {
   type        = string
