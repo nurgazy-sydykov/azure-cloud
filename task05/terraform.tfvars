@@ -52,7 +52,7 @@ traffic_manager = {
 ip_restrictions = [
   {
     name       = "allow-ip"
-    ip_address = "18.153.146.156"
+    ip_address = "18.153.146.156/32"
     action     = "Allow"
     priority   = 100
   },
