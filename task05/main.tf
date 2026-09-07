@@ -20,7 +20,7 @@ module "asp" {
   name                = each.value.name
   location            = module.rg[each.value.rg_key].location
   resource_group_name = module.rg[each.value.rg_key].name
-  sku                 = each.value.sku
+  sku_name            = each.value.sku
   worker_count        = each.value.worker_count
   tags                = { (var.tag_key) = var.tag_value }
 }
