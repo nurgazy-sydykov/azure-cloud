@@ -63,10 +63,10 @@ ip_restrictions = [
     priority    = 200
   },
   {
-    name       = "deny-all"
-    ip_address = "0.0.0.0/0"
+    name       = "Deny all"
+    ip_address = "Any"
     action     = "Deny"
-    priority   = 300
+    priority   = 2147483647
   }
 ]
 
