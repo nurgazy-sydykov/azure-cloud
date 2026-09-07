@@ -37,8 +37,7 @@ module "app" {
   resource_group_name = module.rg[each.value.rg_key].name
   app_service_plan_id = module.asp[each.value.asp_key].id
 
-  allowed_ip          = var.allowed_ip
-  allowed_service_tag = var.allowed_service_tag
+  ip_restrictions     = var.ip_restrictions
 
   tags = { (var.tag_key) = var.tag_value }
 }
