@@ -11,7 +11,7 @@ variable "resource_groups" {
 variable "app_service_plans" {
   type = map(object({
     name         = string
-    sku_name     = string
+    sku          = string
     worker_count = number
     rg_key       = string # key to link with resource_groups
   }))
