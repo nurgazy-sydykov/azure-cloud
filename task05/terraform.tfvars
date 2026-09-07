@@ -47,10 +47,27 @@ traffic_manager = {
 }
 
 # -------------------------
-# IP Restrictions
+# IP restrictions
 # -------------------------
-allowed_ip          = "18.153.146.156/32"
-allowed_service_tag = "AzureTrafficManager"
+ip_restrictions = [
+  {
+    name       = "allow-ip"
+    ip_address = "18.153.146.156"
+    action     = "Allow"
+    priority   = 100
+  },
+  {
+    name        = "allow-tm"
+    service_tag = "AzureTrafficManager"
+    action      = "Allow"
+    priority    = 200
+  },
+  {
+    name     = "deny-all"
+    action   = "Deny"
+    priority = 300
+  }
+]
 
 # -------------------------
 # Tags

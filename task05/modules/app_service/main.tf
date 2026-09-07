@@ -4,29 +4,18 @@ resource "azurerm_windows_web_app" "this" {
   resource_group_name = var.resource_group_name
   service_plan_id     = var.app_service_plan_id
 
-  site_config {
-    ip_restriction {
-      name       = "allow-ip"
-      ip_address = var.allowed_ip
-      action     = "Allow"
-      priority   = 100
-    }
-
-    ip_restriction {
-      name        = "allow-tm"
-      service_tag = var.allowed_service_tag
-      action      = "Allow"
-      priority    = 200
-    }
-
-    # Default deny rule
-    ip_restriction {
-      name       = "deny-all"
-      ip_address = "0.0.0.0/0"
-      action     = "Deny"
-      priority   = 300
+site_config {
+  dynamic "ip_restriction" {
+    for_each = var.ip_restrictions
+    content {
+      name        = ip_restriction.value.name
+      ip_address  = try(ip_restriction.value.ip_address, null)
+      service_tag = try(ip_restriction.value.service_tag, null)
+      action      = ip_restriction.value.action
+      priority    = ip_restriction.value.priority
     }
   }
+}
 
   tags = var.tags
 }
