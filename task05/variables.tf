@@ -37,6 +37,18 @@ variable "traffic_manager" {
   description = "Traffic Manager profile configuration"
 }
 
+# IP restrictions
+variable "ip_restrictions" {
+  type = list(object({
+    name        = string
+    ip_address  = optional(string)
+    service_tag = optional(string)
+    action      = string
+    priority    = number
+  }))
+  description = "List of IP restriction rules for App Services"
+}
+
 # Tag Key
 variable "tag_key" {
   type        = string
