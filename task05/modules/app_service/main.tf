@@ -5,7 +5,7 @@ resource "azurerm_windows_web_app" "this" {
   service_plan_id     = var.app_service_plan_id
 
   site_config {
-    default_ip_restriction_action = "Deny"
+    ip_restriction_default_action = "Deny"
 
     dynamic "ip_restriction" {
       for_each = var.ip_restrictions
