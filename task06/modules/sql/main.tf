@@ -9,33 +9,33 @@ resource "azurerm_mssql_server" "sql_server" {
 }
 
 resource "azurerm_mssql_firewall_rule" "allow_azure_services" {
-  name                = "allow-azure-services"
-  server_id           = azurerm_mssql_server.sql_server.id
-  start_ip_address    = "0.0.0.0"
-  end_ip_address      = "0.0.0.0"
+  name             = "allow-azure-services"
+  server_id        = azurerm_mssql_server.sql_server.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
 }
 
 resource "azurerm_mssql_firewall_rule" "allow_verification_ip" {
-  name              = var.sql_firewall_rule_name
-  server_id         = azurerm_mssql_server.sql_server.id
-  start_ip_address  = var.allowed_ip_address
-  end_ip_address    = var.allowed_ip_address
+  name             = var.sql_firewall_rule_name
+  server_id        = azurerm_mssql_server.sql_server.id
+  start_ip_address = var.allowed_ip_address
+  end_ip_address   = var.allowed_ip_address
 }
 
 resource "azurerm_mssql_database" "sql_db" {
-  name                = var.sql_db_name
-  server_id           = azurerm_mssql_server.sql_server.id
-  sku_name            = var.sql_db_sku
-  tags                = var.tags
+  name      = var.sql_db_name
+  server_id = azurerm_mssql_server.sql_server.id
+  sku_name  = var.sql_db_sku
+  tags      = var.tags
 }
 
 resource "random_password" "sql_admin" {
-  length           = 16
-  special          = true
-  min_upper        = 1
-  min_lower        = 1
-  min_numeric      = 1
-  min_special      = 1
+  length      = 16
+  special     = true
+  min_upper   = 1
+  min_lower   = 1
+  min_numeric = 1
+  min_special = 1
 }
 
 resource "azurerm_key_vault_secret" "sql_admin_name_secret" {
