@@ -32,7 +32,10 @@ resource "azurerm_mssql_database" "sql_db" {
 resource "random_password" "sql_admin" {
   length           = 16
   special          = true
-  override_characters = "!@#$%^&*()-_=+"
+  min_upper        = 1
+  min_lower        = 1
+  min_numeric      = 1
+  min_special      = 1
 }
 
 resource "azurerm_key_vault_secret" "sql_admin_name_secret" {
