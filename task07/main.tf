@@ -29,29 +29,6 @@ data "azurerm_storage_account" "sa_data" {
   resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_storage_container" "container" {
-  name                  = "mycontainer"
-  storage_account_name  = "cmtr3o15j4kjmod7sa"
-  container_access_type = "private"
-}
-
-import {
-  to = azurerm_storage_container.container
-  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Storage/storageAccounts/cmtr3o15j4kjmod7sa/blobServices/default/containers/mycontainer"
-}
-
-resource "azurerm_storage_blob" "blob" {
-  name                   = "blob.txt"
-  storage_account_name   = "cmtr3o15j4kjmod7sa"
-  storage_container_name = "mycontainer"
-  type                   = "Block"
-}
-
-import {
-  to = azurerm_storage_blob.blob
-  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Storage/storageAccounts/cmtr3o15j4kjmod7sa/blobServices/default/containers/mycontainer/blobs/blob.txt"
-}
-
 module "cdn" {
   source = "./modules/cdn"
 
