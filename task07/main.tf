@@ -30,8 +30,8 @@ data "azurerm_storage_account" "sa_data" {
 }
 
 resource "azurerm_storage_container" "container" {
-  name                  = "container1"
-  storage_account_name  = azurerm_storage_account.sa.name
+  name                 = "container1"
+  storage_account_name = azurerm_storage_account.sa.name
 }
 
 import {
