@@ -31,8 +31,7 @@ data "azurerm_storage_account" "sa_data" {
 
 resource "azurerm_storage_container" "container" {
   name                 = "container1"
-  storage_account_name = "cmtr3o15j4kjmod7sa"
-  container_access_type = "private"
+  storage_account_name = "cmtr3o15j4kjmod7sa.blob.core.windows.net"
 }
 
 import {
@@ -42,7 +41,7 @@ import {
 
 resource "azurerm_storage_blob" "blob" {
   name                   = var.blob_filename
-  storage_account_name   = "cmtr3o15j4kjmod7sa"
+  storage_account_name   = "cmtr3o15j4kjmod7sa.blob.core.windows.net"
   storage_container_name = azurerm_storage_container.container.name
   type                   = "Block"
 }
