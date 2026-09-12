@@ -29,6 +29,29 @@ data "azurerm_storage_account" "sa_data" {
   resource_group_name = var.resource_group_name
 }
 
+resource "azurerm_storage_container" "container" {
+  name                  = "mycontainer"
+  storage_account_name  = "cmtr3o15j4kjmod7sa"
+  container_access_type = "private"
+}
+
+import {
+  to = azurerm_storage_container.container
+  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Storage/storageAccounts/cmtr3o15j4kjmod7sa/blobServices/default/containers/mycontainer"
+}
+
+resource "azurerm_storage_blob" "blob" {
+  name                   = "blob.txt"
+  storage_account_name   = "cmtr3o15j4kjmod7sa"
+  storage_container_name = "mycontainer"
+  type                   = "Block"
+}
+
+import {
+  to = azurerm_storage_blob.blob
+  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Storage/storageAccounts/cmtr3o15j4kjmod7sa/blobServices/default/containers/mycontainer/blobs/blob.txt"
+}
+
 module "cdn" {
   source = "./modules/cdn"
 
@@ -43,4 +66,30 @@ module "cdn" {
 
   origin_hostname = data.azurerm_storage_account.sa_data.primary_blob_host
   blob_path       = local.blob_path
+}
+
+# Import blocks for Front Door resources
+import {
+  to = module.cdn.azurerm_cdn_frontdoor_profile.fd_profile
+  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Cdn/profiles/cmtr-3o15j4kj-mod7-fd-profile"
+}
+
+import {
+  to = module.cdn.azurerm_cdn_frontdoor_endpoint.fd_endpoint
+  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Cdn/profiles/cmtr-3o15j4kj-mod7-fd-profile/afdEndpoints/cmtr-3o15j4kj-mod7-fd-endpoint"
+}
+
+import {
+  to = module.cdn.azurerm_cdn_frontdoor_origin_group.fd_origin_group
+  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Cdn/profiles/cmtr-3o15j4kj-mod7-fd-profile/originGroups/cmtr-3o15j4kj-mod7-fd-origin-group"
+}
+
+import {
+  to = module.cdn.azurerm_cdn_frontdoor_origin.fd_origin
+  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Cdn/profiles/cmtr-3o15j4kj-mod7-fd-profile/originGroups/cmtr-3o15j4kj-mod7-fd-origin-group/origins/cmtr-3o15j4kj-mod7-fd-origin"
+}
+
+import {
+  to = module.cdn.azurerm_cdn_frontdoor_route.fd_route
+  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Cdn/profiles/cmtr-3o15j4kj-mod7-fd-profile/afdEndpoints/cmtr-3o15j4kj-mod7-fd-endpoint/routes/default"
 }
