@@ -8,19 +8,9 @@ variable "resource_group_name" {
   description = "Name of the existing Resource Group."
 }
 
-variable "resource_group_id" {
-  type        = string
-  description = "Resource ID of the existing Resource Group."
-}
-
 variable "storage_account_name" {
   type        = string
   description = "Name of the existing Storage Account."
-}
-
-variable "storage_account_id" {
-  type        = string
-  description = "Resource ID of the existing Storage Account."
 }
 
 variable "blob_filename" {
