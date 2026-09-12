@@ -55,11 +55,11 @@ graph TD
     end
 
     subgraph FD["Azure CDN Front Door"]
-        PROFILE["Front Door Profile: cmtr-3o15j4kj-mod7-fd-profile"]
-        ENDPOINT["Endpoint: cmtr-3o15j4kj-mod7-fd-endpoint"]
-        ORIGINGROUP["Origin Group: cmtr-3o15j4kj-mod7-fd-origin-group"]
-        ORIGIN["Origin: cmtr-3o15j4kj-mod7-fd-origin"]
-        ROUTE["Route: default"]
+        PROFILE["Front Door Profile"]
+        ENDPOINT["Front Door Endpoint"]
+        ORIGINGROUP["Origin Group"]
+        ORIGIN["Origin (blob.core.windows.net)"]
+        ROUTE["Route (/blob.txt)"]
     end
 
     PROFILE --> ENDPOINT
@@ -67,7 +67,6 @@ graph TD
     ORIGINGROUP --> ORIGIN
     ENDPOINT --> ROUTE
     ROUTE --> ORIGINGROUP
-
     ORIGIN --> SA
 ```
 
