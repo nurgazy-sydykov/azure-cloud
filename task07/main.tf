@@ -30,13 +30,13 @@ data "azurerm_storage_account" "sa_data" {
 }
 
 resource "azurerm_storage_container" "container" {
-  name                 = "mycontainer"
+  name                 = "container1"
   storage_account_name = var.storage_account_name
 }
 
 import {
   to = azurerm_storage_container.container
-  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Storage/storageAccounts/cmtr3o15j4kjmod7sa/blobServices/default/containers/mycontainer"
+  id = "https://cmtr3o15j4kjmod7sa.blob.core.windows.net/mycontainer"
 }
 
 resource "azurerm_storage_blob" "blob" {
@@ -48,7 +48,7 @@ resource "azurerm_storage_blob" "blob" {
 
 import {
   to = azurerm_storage_blob.blob
-  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Storage/storageAccounts/cmtr3o15j4kjmod7sa/blobServices/default/containers/container1/blobs/blob.txt"
+  id = "https://cmtr3o15j4kjmod7sa.blob.core.windows.net/container1/blob.txt"
 }
 
 module "cdn" {
