@@ -48,7 +48,7 @@ resource "azurerm_storage_blob" "blob" {
 
 import {
   to = azurerm_storage_blob.blob
-  id = "https://cmtr3o15j4kjmod7sa.blob.core.windows.net/"
+  id = "https://cmtr3o15j4kjmod7sa.blob.core.windows.net/mycontainer/blob.txt"
 }
 
 module "cdn" {
