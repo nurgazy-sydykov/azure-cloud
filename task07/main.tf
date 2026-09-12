@@ -30,7 +30,7 @@ data "azurerm_storage_account" "sa_data" {
 }
 
 resource "azurerm_storage_container" "container" {
-  name                 = "container1"
+  name                 = "mycontainer"
   storage_account_name = var.storage_account_name
 }
 
