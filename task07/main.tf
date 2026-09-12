@@ -33,6 +33,7 @@ module "cdn" {
   source = "./modules/cdn"
 
   location             = var.location
+  resource_group_name  = var.resource_group_name
   fd_profile_name      = var.fd_profile_name
   fd_profile_sku       = var.fd_profile_sku
   fd_endpoint_name     = var.fd_endpoint_name
