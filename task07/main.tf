@@ -31,7 +31,8 @@ data "azurerm_storage_account" "sa_data" {
 
 resource "azurerm_storage_container" "container" {
   name                 = "mycontainer"
-  storage_account_name = var.storage_account_name
+  storage_account_name = "cmtr3o15j4kjmod7sa"
+  container_access_type = "private"
 }
 
 import {
@@ -40,9 +41,9 @@ import {
 }
 
 resource "azurerm_storage_blob" "blob" {
-  name                   = var.blob_filename
-  storage_account_name   = var.storage_account_name
-  storage_container_name = azurerm_storage_container.container.name
+  name                   = "blob.txt"
+  storage_account_name   = "cmtr3o15j4kjmod7sa"
+  storage_container_name = "mycontainer"
   type                   = "Block"
 }
 
