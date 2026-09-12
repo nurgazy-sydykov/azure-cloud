@@ -36,7 +36,7 @@ resource "azurerm_storage_container" "container" {
 
 import {
   to = azurerm_storage_container.container
-  id = "https://cmtr3o15j4kjmod7sa.blob.core.windows.net/container1"
+  id = "https://cmtr3o15j4kjmod7sa.blob.core.windows.net/mycontainer"
 }
 
 resource "azurerm_storage_blob" "blob" {
