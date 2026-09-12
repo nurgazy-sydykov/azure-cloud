@@ -1,8 +1,7 @@
 location = "Central India"
 
 resource_group_name = "cmtr-3o15j4kj-mod7-rg"
-
-storage_account_name = "cmtr3o15j4kjmod7sa.blob.core.windows.net"
+storage_account_name = "cmtr3o15j4kjmod7sa"
 
 blob_filename = "blob.txt"
 
