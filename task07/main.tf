@@ -32,6 +32,7 @@ data "azurerm_storage_account" "sa_data" {
 resource "azurerm_storage_container" "container" {
   name                 = "container1"
   storage_account_name = "cmtr3o15j4kjmod7sa"
+  container_access_type = "private"
 }
 
 import {
