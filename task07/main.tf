@@ -42,5 +42,5 @@ module "cdn" {
   fd_route_name        = var.fd_route_name
 
   origin_hostname = azurerm_storage_account.imported_sa.primary_blob_host
-  blob_path       = local.blob_path
+  blob_path       = "/blob.txt"
 }
