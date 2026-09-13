@@ -1,8 +1,3 @@
-import {
-  to = module.cdn.azurerm_cdn_frontdoor_profile.fd_profile
-  id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Cdn/profiles/cmtr-3o15j4kj-mod7-fd-profile"
-}
-
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
