@@ -33,6 +33,7 @@ resource "azurerm_cdn_frontdoor_origin" "fd_origin" {
   http_port                      = 80
   https_port                     = 443
   certificate_name_check_enabled = false
+  enabled                        = true
 }
 
 resource "azurerm_cdn_frontdoor_route" "fd_route" {
