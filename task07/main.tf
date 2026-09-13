@@ -24,13 +24,6 @@ import {
   id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Storage/storageAccounts/cmtr3o15j4kjmod7sa"
 }
 
-/*
-data "azurerm_storage_account" "sa_data" {
-  name                = var.storage_account_name
-  resource_group_name = var.resource_group_name
-}
-*/
-
 module "cdn" {
   source = "./modules/cdn"
 
