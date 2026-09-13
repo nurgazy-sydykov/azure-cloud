@@ -12,6 +12,4 @@ fd_endpoint_name     = "cmtr-3o15j4kj-mod7-fd-endpoint"
 fd_origin_group_name = "cmtr-3o15j4kj-mod7-fd-origin-group"
 fd_origin_name       = "cmtr-3o15j4kj-mod7-fd-origin"
 fd_route_name        = "default"
-#origin_hostname      = "cmtr3o15j4kjmod7sa.blob.core.windows.net"
-origin_hostname      = azurerm_storage_account.imported_sa.primary_blob_host
-
+origin_hostname      = "cmtr3o15j4kjmod7sa.blob.core.windows.net"
