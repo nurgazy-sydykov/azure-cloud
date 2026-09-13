@@ -1,9 +1,3 @@
-resource "azurerm_cdn_frontdoor_profile" "fd_profile" {
-  name                = var.fd_profile_name
-  resource_group_name = var.resource_group_name
-  sku_name            = var.fd_profile_sku
-}
-
 resource "azurerm_cdn_frontdoor_endpoint" "fd_endpoint" {
   name                     = var.fd_endpoint_name
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.fd_profile.id

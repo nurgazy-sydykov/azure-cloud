@@ -1,3 +1,9 @@
+resource "azurerm_cdn_frontdoor_profile" "fd_profile" {
+  name                = var.fd_profile_name
+  resource_group_name = var.resource_group_name
+  sku_name            = var.fd_profile_sku
+}
+
 import {
   to = module.cdn.azurerm_cdn_frontdoor_profile.fd_profile
   id = "/subscriptions/8da553a7-8f4c-48a2-8701-dafce0b7b79b/resourceGroups/cmtr-3o15j4kj-mod7-rg/providers/Microsoft.Cdn/profiles/cmtr-3o15j4kj-mod7-fd-profile"
