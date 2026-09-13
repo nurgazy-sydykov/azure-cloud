@@ -47,3 +47,8 @@ variable "blob_path" {
   type        = string
   description = "Path to the blob file."
 }
+
+variable "origin_hostname" {
+  description = "The hostname of the storage account blob service used by Front Door origin"
+  type        = string
+}
