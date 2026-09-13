@@ -47,8 +47,3 @@ variable "fd_route_name" {
   type        = string
   description = "Azure Front Door route name."
 }
-
-variable "origin_hostname" {
-  description = "The hostname of the storage account blob service used by Front Door origin"
-  type        = string
-}
