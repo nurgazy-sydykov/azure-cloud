@@ -46,4 +46,7 @@ resource "azurerm_cdn_frontdoor_route" "fd_route" {
 
   supported_protocols = ["Http", "Https"]
   forwarding_protocol = "MatchRequest"
+  link_to_default_domain = true
+
+  cdn_frontdoor_origin_path = "/mycontainer"
 }
