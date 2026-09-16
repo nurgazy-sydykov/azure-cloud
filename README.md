@@ -104,18 +104,20 @@ Deployment may take up to 30 minutes.
 
 ## ✅ Verification
 
-- ACI App: Accessible via FQDN output (`aci_fqdn`).
-Displays: `Hello from ACI`.
-- AKS App: Accessible via LoadBalancer IP (`aks_lb_ip`).
-Displays: `Hello from K8S`.
-- Redis Connectivity: Refreshing either page increments the visit counter, proving successful Redis integration.
+ACI App: Accessible via FQDN output (aci_fqdn).
+Displays: Hello from ACI.
+
+AKS App: Accessible via LoadBalancer IP (aks_lb_ip).
+Displays: Hello from K8S.
+
+Redis Connectivity: Refreshing either page increments the visit counter, proving successful Redis integration.
 
 ---
 
 ## 📌 Notes
-- All resources are tagged with `Creator=nurgazy_sydykov@epam.com`.
-- Secrets are stored securely in `Key Vault`.
-- Redis communicates only via SSL port `6380`.
-- No backend is defined — Terraform uses local backend by default.
-- `local-exec` provisioners and `prevent_destroy` lifecycle attributes are prohibited.
-- Run `terraform fmt` before committing to ensure clean formatting.
+All resources are tagged with Creator=nurgazy_sydykov@epam.com.
+Secrets are stored securely in Key Vault.
+Redis communicates only via SSL port 6380.
+No backend is defined — Terraform uses local backend by default.
+local-exec provisioners and prevent_destroy lifecycle attributes are prohibited.
+Run terraform fmt before committing to ensure clean formatting.
