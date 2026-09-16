@@ -17,11 +17,8 @@ resource "azurerm_container_registry_task" "build_task" {
     os = "Linux"
   }
 
-  agent_configuration {
-    cpu = 2
-  }
-
   docker_step {
+    dockerfile_path      = "Dockerfile"
     context_path         = "https://github.com/nurgazy-sydykov/azure-cloud.git"
     context_access_token = var.git_pat
     image_names          = ["${var.image_name}:latest"]
@@ -30,9 +27,3 @@ resource "azurerm_container_registry_task" "build_task" {
   tags = var.tags
 }
 
-resource "azurerm_container_registry_task_schedule_run" "schedule" {
-  container_registry_task_id = azurerm_container_registry_task.build_task.id
-  cron_expression            = "0 */6 * * *" # every 6 hours
-
-  tags = var.tags
-}

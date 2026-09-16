@@ -33,13 +33,11 @@ resource "azurerm_container_group" "aci" {
     }
   }
 
-  ip_address {
-    type     = "Public"
-    dns_name_label = var.aci_name
-    ports {
-      port     = 80
-      protocol = "TCP"
-    }
+  ip_address_type = "Public"
+  dns_name_label  = var.aci_name
+  ports {
+	port     = 80
+	protocol = "TCP"
   }
 
   tags = var.tags

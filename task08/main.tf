@@ -74,7 +74,7 @@ module "aci" {
 
 # Deployment manifest
 resource "kubectl_manifest" "deployment" {
-  yaml_body = templatefile("${path.module}/k8s-manifests/deployment.yaml.tftpl", {
+  yaml_body = templatefile("${path.root}/k8s-manifests/deployment.yaml.tftpl", {
     image_name = "${module.acr.login_server}/${module.acr.image_name}:latest"
   })
 
@@ -90,7 +90,7 @@ resource "kubectl_manifest" "deployment" {
 
 # Secret provider manifest
 resource "kubectl_manifest" "secret_provider" {
-  yaml_body = templatefile("${path.module}/k8s-manifests/secret-provider.yaml.tftpl", {
+  yaml_body = templatefile("${path.root}/k8s-manifests/deployment.yaml.tftpl", {
     keyvault_name = local.keyvault_name
   })
 
@@ -99,7 +99,7 @@ resource "kubectl_manifest" "secret_provider" {
 
 # Service manifest
 resource "kubectl_manifest" "service" {
-  yaml_body = file("${path.module}/k8s-manifests/service.yaml")
+  yaml_body = file("${path.root}/k8s-manifests/deployment.yaml.tftpl")
 
   wait_for {
     field {

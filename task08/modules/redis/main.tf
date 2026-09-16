@@ -6,7 +6,7 @@ resource "azurerm_redis_cache" "redis" {
   family              = "C"
   sku_name            = "Basic"
 
-  enable_non_ssl_port = false
+  non_ssl_port_enabled = false
 
   tags = var.tags
 }
