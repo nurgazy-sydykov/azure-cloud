@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: redis-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-app
+  template:
+    metadata:
+      labels:
+        app: redis-app
+    spec:
+      containers:
+        - name: redis-app
+          image: ${image_name}
+          ports:
+            - containerPort: 80
+          env:
+            - name: CREATOR
+              value: "K8S"
+            - name: REDIS_PORT
+              value: "6380"
+            - name: REDIS_SSL_MODE
+              value: "True"
+          envFrom:
+            - secretRef:
+                name: redis-secrets
