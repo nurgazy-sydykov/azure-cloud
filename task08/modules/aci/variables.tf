@@ -28,6 +28,17 @@ variable "acr_login_server" {
   description = "Login server of the Azure Container Registry."
 }
 
+variable "acr_username" {
+  type        = string
+  description = "Admin username of the Azure Container Registry."
+}
+
+variable "acr_password" {
+  type        = string
+  sensitive   = true
+  description = "Admin password of the Azure Container Registry."
+}
+
 variable "redis_hostname_secret" {
   type        = string
   description = "Key Vault secret ID for Redis hostname."

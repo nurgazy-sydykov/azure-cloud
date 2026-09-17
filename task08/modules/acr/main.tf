@@ -19,9 +19,14 @@ resource "azurerm_container_registry_task" "build_task" {
 
   docker_step {
     dockerfile_path      = "Dockerfile"
-    context_path         = "https://github.com/nurgazy-sydykov/azure-cloud.git"
+    context_path         = "https://github.com/nurgazy-sydykov/azure-cloud.git#main:task08/application"
     context_access_token = var.git_pat
     image_names          = ["${var.image_name}:latest"]
+  }
+
+  timer_trigger {
+    name     = "daily-build"
+    schedule = "0 0 * * *"
   }
 
   tags = var.tags

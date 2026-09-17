@@ -8,12 +8,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name         = "system"
     node_count   = 1
     vm_size      = "Standard_D2ads_v6"
-    os_disk_type = "Ephemeral"
+    os_disk_type = "Managed"
   }
 
   identity {
     type = "SystemAssigned"
   }
+
+  oidc_issuer_enabled = true
 
   key_vault_secrets_provider {
     secret_rotation_enabled  = true
@@ -35,6 +37,17 @@ resource "azurerm_key_vault_access_policy" "aks_kv" {
   key_vault_id = var.keyvault_id
   tenant_id    = azurerm_kubernetes_cluster.aks.identity[0].tenant_id
   object_id    = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+
+  secret_permissions = [
+    "Get",
+    "List"
+  ]
+}
+
+resource "azurerm_key_vault_access_policy" "aks_secrets_provider_kv" {
+  key_vault_id = var.keyvault_id
+  tenant_id    = azurerm_kubernetes_cluster.aks.identity[0].tenant_id
+  object_id    = azurerm_kubernetes_cluster.aks.key_vault_secrets_provider[0].secret_identity[0].object_id
 
   secret_permissions = [
     "Get",

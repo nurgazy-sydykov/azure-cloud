@@ -1,39 +1,26 @@
-import os
 from flask import Flask
-import redis
+from redis import Redis, RedisError
+import os
+import socket
+
+# Connect to Redis
+redis = Redis(host=os.getenv("REDIS_URL", "localhost"),
+              port=os.getenv("REDIS_PORT", "6379"), db=0, password=os.getenv("REDIS_PWD", ""),
+              ssl=os.getenv("REDIS_SSL_MODE", "true"))
 
 app = Flask(__name__)
-
-creator = os.getenv("CREATOR", "Unknown")
-redis_host = os.getenv("REDIS_URL")
-redis_pwd = os.getenv("REDIS_PWD")
-redis_port = int(os.getenv("REDIS_PORT", "6380"))
-redis_ssl = os.getenv("REDIS_SSL_MODE", "True") == "True"
-
-r = redis.Redis(
-    host=redis_host,
-    port=redis_port,
-    password=redis_pwd,
-    ssl=redis_ssl,
-    ssl_cert_reqs=None,
-)
 
 @app.route("/")
 def index():
     try:
-        r.incr("visits")
-        visits = int(r.get("visits") or 0)
-    except Exception:
-        visits = -1
+        visits = redis.incr("counter")
+    except RedisError:
+        visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-    if creator == "ACI":
-        greeting = "Hello from ACI"
-    elif creator == "K8S":
-        greeting = "Hello from K8S"
-    else:
-        greeting = "Hello from App"
-
-    return f"{greeting}. Visits: {visits}"
+    html = """<h3>Hello from {name}!</h3>
+              <b>Hostname:</b> {hostname}<br/>
+              <b>Visits:</b> {visits}"""
+    return html.format(name=os.getenv("CREATOR"), hostname=socket.gethostname(), visits=visits)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.getenv("PORT", "80")))
+    app.run(host="0.0.0.0", port=8080)

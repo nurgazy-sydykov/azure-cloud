@@ -6,10 +6,13 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">= 3.110.0, < 4.0.0"
     }
-
     kubectl = {
       source  = "alekc/kubectl"
       version = ">= 1.14.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.0.0"
     }
   }
 }
@@ -19,8 +22,16 @@ provider "azurerm" {
 }
 
 provider "kubectl" {
-  host                   = module.aks.kube_config["host"]
-  client_certificate     = base64decode(module.aks.kube_config["client_certificate"])
-  client_key             = base64decode(module.aks.kube_config["client_key"])
-  cluster_ca_certificate = base64decode(module.aks.kube_config["cluster_ca_certificate"])
+  host                   = yamldecode(module.aks.kube_config).clusters[0].cluster.server
+  client_certificate     = base64decode(yamldecode(module.aks.kube_config).users[0].user.client-certificate-data)
+  client_key             = base64decode(yamldecode(module.aks.kube_config).users[0].user.client-key-data)
+  cluster_ca_certificate = base64decode(yamldecode(module.aks.kube_config).clusters[0].cluster.certificate-authority-data)
+  load_config_file       = false
+}
+
+provider "kubernetes" {
+  host                   = yamldecode(module.aks.kube_config).clusters[0].cluster.server
+  client_certificate     = base64decode(yamldecode(module.aks.kube_config).users[0].user.client-certificate-data)
+  client_key             = base64decode(yamldecode(module.aks.kube_config).users[0].user.client-key-data)
+  cluster_ca_certificate = base64decode(yamldecode(module.aks.kube_config).clusters[0].cluster.certificate-authority-data)
 }

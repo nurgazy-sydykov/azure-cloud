@@ -1,31 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: redis-flask-app
   labels:
-    app: redis-app
+    app: redis-flask-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redis-app
+      app: redis-flask-app
   template:
     metadata:
       labels:
-        app: redis-app
+        app: redis-flask-app
     spec:
       containers:
-        - name: redis-app
-          image: ${image_name}
+        - name: devops
+          image: ${acr_login_server}/${app_image_name}:${image_tag}
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           env:
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secrets
+                  key: redishostname
+            - name: REDIS_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secrets
+                  key: redisprimarykey
             - name: CREATOR
-              value: "K8S"
+              value: K8S
             - name: REDIS_PORT
               value: "6380"
             - name: REDIS_SSL_MODE
-              value: "True"
-          envFrom:
-            - secretRef:
-                name: redis-secrets
+              value: "true"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: /mnt/secrets-store
+              readOnly: true
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: redis-flask-app-kv-integration

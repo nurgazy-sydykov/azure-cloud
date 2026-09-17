@@ -3,11 +3,12 @@ resource "azurerm_container_group" "aci" {
   location            = var.location
   resource_group_name = var.rg_name
   os_type             = "Linux"
+  sku                 = "Standard"
 
   image_registry_credential {
     server   = var.acr_login_server
-    username = "admin" # using admin creds since ACR admin_enabled = true
-    password = ""      # Terraform will inject automatically if admin_enabled
+    username = var.acr_username
+    password = var.acr_password
   }
 
   container {
@@ -17,7 +18,7 @@ resource "azurerm_container_group" "aci" {
     memory = 1.5
 
     ports {
-      port     = 80
+      port     = 8080
       protocol = "TCP"
     }
 

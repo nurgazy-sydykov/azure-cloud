@@ -20,7 +20,7 @@ module "acr" {
   tags     = local.common_tags
 
   acr_name   = local.acr_name
-  image_name = "${var.name_prefix}-app"
+  image_name = local.image_name
   git_pat    = var.git_pat
 }
 
@@ -41,8 +41,8 @@ module "redis" {
   tags           = local.common_tags
   redis_name     = local.redis_name
   keyvault_id    = module.keyvault.id
-  kv_secret_host = "redis-hostname"
-  kv_secret_key  = "redis-primary-key"
+  kv_secret_host = local.redis_hostname_secret_name
+  kv_secret_key  = local.redis_primary_key_secret_name
 }
 
 module "aks" {
@@ -67,15 +67,30 @@ module "aci" {
   aci_name         = local.aci_name
   image_name       = module.acr.image_name
   acr_login_server = module.acr.login_server
+  acr_username     = module.acr.admin_username
+  acr_password     = module.acr.admin_password
 
   redis_hostname_secret    = module.redis.redis_hostname_secret
   redis_primary_key_secret = module.redis.redis_primary_key_secret
 }
 
-# Deployment manifest
+resource "kubectl_manifest" "secret_provider" {
+  yaml_body = templatefile("${path.module}/k8s-manifests/secret-provider.yaml.tftpl", {
+    aks_kv_access_identity_id  = module.aks.kv_secret_identity_client_id
+    kv_name                    = local.keyvault_name
+    redis_url_secret_name      = local.redis_hostname_secret_name
+    redis_password_secret_name = local.redis_primary_key_secret_name
+    tenant_id                  = module.aks.tenant_id
+  })
+
+  depends_on = [module.aks, module.keyvault, module.redis]
+}
+
 resource "kubectl_manifest" "deployment" {
-  yaml_body = templatefile("${path.root}/k8s-manifests/deployment.yaml.tftpl", {
-    image_name = "${module.acr.login_server}/${module.acr.image_name}:latest"
+  yaml_body = templatefile("${path.module}/k8s-manifests/deployment.yaml.tftpl", {
+    acr_login_server = module.acr.login_server
+    app_image_name   = module.acr.image_name
+    image_tag        = "latest"
   })
 
   wait_for {
@@ -85,21 +100,11 @@ resource "kubectl_manifest" "deployment" {
     }
   }
 
-  depends_on = [module.aks]
+  depends_on = [kubectl_manifest.secret_provider, module.acr]
 }
 
-# Secret provider manifest
-resource "kubectl_manifest" "secret_provider" {
-  yaml_body = templatefile("${path.module}/k8s-manifests/secret-provider.yaml.tftpl", {
-    keyvault_name = local.keyvault_name
-  })
-
-  depends_on = [module.aks]
-}
-
-# Service manifest
 resource "kubectl_manifest" "service" {
-  yaml_body = file("${path.root}/k8s-manifests/deployment.yaml.tftpl")
+  yaml_body = file("${path.module}/k8s-manifests/service.yaml")
 
   wait_for {
     field {
@@ -109,14 +114,14 @@ resource "kubectl_manifest" "service" {
     }
   }
 
-  depends_on = [module.aks]
+  depends_on = [kubectl_manifest.deployment]
 }
 
-data "kubernetes_service_v1" "app_service" {
+data "kubernetes_service_v1" "app" {
   metadata {
-    name      = "app-service"
-    namespace = "default"
+    name = "redis-flask-app-service"
   }
 
   depends_on = [kubectl_manifest.service]
 }
+

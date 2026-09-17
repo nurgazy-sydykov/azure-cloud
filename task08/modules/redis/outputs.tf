@@ -4,11 +4,12 @@ output "id" {
 }
 
 output "redis_hostname_secret" {
-  description = "The Key Vault secret resource for Redis hostname."
-  value       = azurerm_key_vault_secret.redis_hostname.id
+  description = "The Redis hostname stored in Key Vault."
+  value       = azurerm_redis_cache.redis.hostname
 }
 
 output "redis_primary_key_secret" {
-  description = "The Key Vault secret resource for Redis primary key."
-  value       = azurerm_key_vault_secret.redis_primary_key.id
+  description = "The Redis primary access key stored in Key Vault."
+  value       = azurerm_redis_cache.redis.primary_access_key
+  sensitive   = true
 }
