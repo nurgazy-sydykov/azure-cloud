@@ -5,5 +5,5 @@ output "aci_fqdn" {
 
 output "aks_lb_ip" {
   description = "LoadBalancer IP address of the application deployed in AKS."
-  value       = data.kubernetes_service.app_service.status[0].load_balancer[0].ingress[0].ip
+  value       = data.kubernetes_service_v1.app_service.status[0].load_balancer[0].ingress[0].ip
 }
