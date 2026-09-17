@@ -6,8 +6,8 @@ resource "azurerm_container_group" "aci" {
 
   image_registry_credential {
     server   = var.acr_login_server
-    username = "admin"   # using admin creds since ACR admin_enabled = true
-    password = ""        # Terraform will inject automatically if admin_enabled
+    username = "admin" # using admin creds since ACR admin_enabled = true
+    password = ""      # Terraform will inject automatically if admin_enabled
   }
 
   container {

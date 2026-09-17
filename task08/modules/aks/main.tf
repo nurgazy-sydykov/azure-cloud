@@ -5,9 +5,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = "${var.aks_name}-dns"
 
   default_node_pool {
-    name       = "system"
-    node_count = 1
-    vm_size    = "Standard_D2ads_v6"
+    name         = "system"
+    node_count   = 1
+    vm_size      = "Standard_D2ads_v6"
     os_disk_type = "Ephemeral"
   }
 
@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   key_vault_secrets_provider {
-    secret_rotation_enabled = true
+    secret_rotation_enabled  = true
     secret_rotation_interval = "2m"
   }
 

@@ -27,20 +27,20 @@ module "acr" {
 module "keyvault" {
   source = "./modules/keyvault"
 
-  rg_name        = azurerm_resource_group.rg.name
-  location       = var.location
-  tags           = local.common_tags
-  keyvault_name  = local.keyvault_name
+  rg_name       = azurerm_resource_group.rg.name
+  location      = var.location
+  tags          = local.common_tags
+  keyvault_name = local.keyvault_name
 }
 
 module "redis" {
   source = "./modules/redis"
 
-  rg_name       = azurerm_resource_group.rg.name
-  location      = var.location
-  tags          = local.common_tags
-  redis_name    = local.redis_name
-  keyvault_id   = module.keyvault.id
+  rg_name        = azurerm_resource_group.rg.name
+  location       = var.location
+  tags           = local.common_tags
+  redis_name     = local.redis_name
+  keyvault_id    = module.keyvault.id
   kv_secret_host = "redis-hostname"
   kv_secret_key  = "redis-primary-key"
 }
@@ -48,27 +48,27 @@ module "redis" {
 module "aks" {
   source = "./modules/aks"
 
-  rg_name        = azurerm_resource_group.rg.name
-  location       = var.location
-  tags           = local.common_tags
+  rg_name  = azurerm_resource_group.rg.name
+  location = var.location
+  tags     = local.common_tags
 
-  aks_name       = local.aks_name
-  acr_id         = module.acr.id
-  keyvault_id    = module.keyvault.id
+  aks_name    = local.aks_name
+  acr_id      = module.acr.id
+  keyvault_id = module.keyvault.id
 }
 
 module "aci" {
   source = "./modules/aci"
 
-  rg_name        = azurerm_resource_group.rg.name
-  location       = var.location
-  tags           = local.common_tags
+  rg_name  = azurerm_resource_group.rg.name
+  location = var.location
+  tags     = local.common_tags
 
-  aci_name       = local.aci_name
-  image_name     = module.acr.image_name
+  aci_name         = local.aci_name
+  image_name       = module.acr.image_name
   acr_login_server = module.acr.login_server
 
-  redis_hostname_secret = module.redis.redis_hostname_secret
+  redis_hostname_secret    = module.redis.redis_hostname_secret
   redis_primary_key_secret = module.redis.redis_primary_key_secret
 }
 
