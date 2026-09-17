@@ -112,7 +112,7 @@ resource "kubectl_manifest" "service" {
   depends_on = [module.aks]
 }
 
-data "kubernetes_service" "app_service" {
+data "kubernetes_service_v1" "app_service" {
   metadata {
     name      = "app-service"
     namespace = "default"
