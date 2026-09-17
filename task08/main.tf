@@ -90,7 +90,7 @@ resource "kubectl_manifest" "deployment" {
 
 # Secret provider manifest
 resource "kubectl_manifest" "secret_provider" {
-  yaml_body = templatefile("${path.root}/k8s-manifests/deployment.yaml.tftpl", {
+  yaml_body = templatefile("${path.module}/k8s-manifests/secret-provider.yaml.tftpl", {
     keyvault_name = local.keyvault_name
   })
 
