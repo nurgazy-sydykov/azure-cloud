@@ -8,7 +8,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name         = "system"
     node_count   = 1
     vm_size      = "Standard_D2ads_v6"
-    os_disk_type = "Managed"
+    os_disk_type = "Ephemeral"
   }
 
   identity {
