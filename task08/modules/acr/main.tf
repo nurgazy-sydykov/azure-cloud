@@ -32,3 +32,6 @@ resource "azurerm_container_registry_task" "build_task" {
   tags = var.tags
 }
 
+resource "azurerm_container_registry_task_schedule_run_now" "build_task" {
+  container_registry_task_id = azurerm_container_registry_task.build_task.id
+}
