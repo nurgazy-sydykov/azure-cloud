@@ -60,6 +60,8 @@ module "aks" {
 module "aci" {
   source = "./modules/aci"
 
+  depends_on = [module.acr]
+
   rg_name  = azurerm_resource_group.rg.name
   location = var.location
   tags     = local.common_tags
