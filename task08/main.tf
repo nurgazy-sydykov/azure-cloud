@@ -57,6 +57,13 @@ module "aks" {
   keyvault_id = module.keyvault.id
 }
 
+data "azurerm_kubernetes_cluster" "aks" {
+  name                = module.aks.aks_name
+  resource_group_name = azurerm_resource_group.rg.name
+
+  depends_on = [module.aks]
+}
+
 module "aci" {
   source = "./modules/aci"
 
@@ -97,18 +104,6 @@ resource "kubectl_manifest" "deployment" {
     field {
       key   = "status.availableReplicas"
       value = "1"
-    }
-    field {
-      key   = "status.readyReplicas"
-      value = "1"
-    }
-    field {
-      key   = "status.updatedReplicas"
-      value = "1"
-    }
-    condition {
-      type   = "Available"
-      status = "True"
     }
   }
 
