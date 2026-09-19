@@ -27,6 +27,7 @@ provider "kubectl" {
   client_key             = base64decode(yamldecode(module.aks.kube_config).users[0].user.client-key-data)
   cluster_ca_certificate = base64decode(yamldecode(module.aks.kube_config).clusters[0].cluster.certificate-authority-data)
   load_config_file       = false
+  lazy_load              = true
 }
 
 provider "kubernetes" {
