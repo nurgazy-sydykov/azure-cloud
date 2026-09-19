@@ -98,6 +98,18 @@ resource "kubectl_manifest" "deployment" {
       key   = "status.availableReplicas"
       value = "1"
     }
+    field {
+      key   = "status.readyReplicas"
+      value = "1"
+    }
+    field {
+      key   = "status.updatedReplicas"
+      value = "1"
+    }
+    condition {
+      type   = "Available"
+      status = "True"
+    }
   }
 
   depends_on = [kubectl_manifest.secret_provider, module.acr]
@@ -124,4 +136,3 @@ data "kubernetes_service_v1" "app" {
 
   depends_on = [kubectl_manifest.service]
 }
-
