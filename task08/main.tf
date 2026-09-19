@@ -57,13 +57,6 @@ module "aks" {
   keyvault_id = module.keyvault.id
 }
 
-data "azurerm_kubernetes_cluster" "aks" {
-  name                = module.aks.aks_name
-  resource_group_name = azurerm_resource_group.rg.name
-
-  depends_on = [module.aks]
-}
-
 module "aci" {
   source = "./modules/aci"
 
