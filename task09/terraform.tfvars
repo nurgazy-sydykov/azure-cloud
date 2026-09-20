@@ -1,6 +1,0 @@
-location                      = "Central India"
-resource_group_name           = "cmtr-3o15j4kj-mod9-rg"
-virtual_network_name          = "cmtr-3o15j4kj-mod9-vnet"
-aks_subnet_name               = "aks-snet"
-virtual_network_address_space = "10.0.0.0/16"
-aks_loadbalancer_ip           = "4.188.69.14"
