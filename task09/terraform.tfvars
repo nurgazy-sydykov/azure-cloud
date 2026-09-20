@@ -1,0 +1,5 @@
+location             = "Central India"
+resource_group_name  = "cmtr-3o15j4kj-mod9-rg"
+virtual_network_name = "cmtr-3o15j4kj-mod9-vnet"
+aks_subnet_name      = "aks-snet"
+aks_loadbalancer_ip  = "20.235.206.118"

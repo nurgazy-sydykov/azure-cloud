@@ -1,0 +1,9 @@
+output "azure_firewall_public_ip" {
+  description = "Public IP address assigned to the Azure Firewall."
+  value       = local.firewall_public_ip
+}
+
+output "azure_firewall_private_ip" {
+  description = "Private IP address assigned to the Azure Firewall."
+  value       = local.firewall_private_ip
+}
