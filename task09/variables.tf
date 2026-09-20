@@ -18,6 +18,11 @@ variable "aks_subnet_name" {
   description = "Existing subnet used by the AKS cluster."
 }
 
+variable "virtual_network_address_space" {
+  type        = string
+  description = "Address space of the existing virtual network."
+}
+
 variable "aks_loadbalancer_ip" {
   type        = string
   description = "Public IP address of the AKS load balancer used by the NGINX service."

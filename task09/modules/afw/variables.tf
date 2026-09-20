@@ -18,49 +18,14 @@ variable "aks_subnet_id" {
   description = "Existing AKS subnet resource ID."
 }
 
-variable "firewall_subnet_address" {
+variable "virtual_network_address_space" {
   type        = string
-  description = "Address prefix for the required AzureFirewallSubnet."
+  description = "Address space of the existing virtual network."
 }
 
 variable "name_prefix" {
   type        = string
   description = "Naming prefix for resources created by this module."
-}
-
-variable "firewall_public_ip_name" {
-  type        = string
-  description = "Azure Firewall public IP resource name."
-}
-
-variable "firewall_name" {
-  type        = string
-  description = "Azure Firewall resource name."
-}
-
-variable "route_table_name" {
-  type        = string
-  description = "Route table resource name."
-}
-
-variable "firewall_ip_configuration" {
-  type        = string
-  description = "Azure Firewall IP configuration name."
-}
-
-variable "application_rule_collection" {
-  type        = string
-  description = "Application rule collection name."
-}
-
-variable "network_rule_collection" {
-  type        = string
-  description = "Network rule collection name."
-}
-
-variable "nat_rule_collection" {
-  type        = string
-  description = "NAT rule collection name."
 }
 
 variable "aks_loadbalancer_ip" {
