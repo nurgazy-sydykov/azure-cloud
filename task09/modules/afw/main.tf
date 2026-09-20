@@ -42,7 +42,7 @@ resource "azurerm_route_table" "aks" {
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = local.firewall_private_ip
   }
-  
+
   route {
     name           = format("%s-%s", var.name_prefix, "firewall-public-ip")
     address_prefix = format("%s/32", local.firewall_public_ip)
