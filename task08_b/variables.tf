@@ -7,7 +7,7 @@ variable "name_prefix" {
 variable "location" {
   description = "Azure region for all resources in this task."
   type        = string
-  default     = "eastus"
+  default     = "centralindia"
 }
 
 variable "app_image_name" {
