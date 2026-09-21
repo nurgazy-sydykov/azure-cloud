@@ -41,7 +41,7 @@ variable "default_node_pool_os_disk_type" {
 variable "kubernetes_version" {
   description = "Kubernetes version to deploy."
   type        = string
-  default     = "1.29.7"
+  default     = "1.37.0"
 }
 
 variable "tags" {
