@@ -9,7 +9,7 @@ resource "time_rotating" "sas_expiry" {
 data "archive_file" "app" {
   type        = "tar.gz"
   source_dir  = "${path.root}/application"
-  output_path = "${path.root}/application/app.tar.gz"
+  output_path = "${path.root}/.terraform/app-content.tar.gz"
 }
 
 resource "azurerm_storage_account" "sa" {

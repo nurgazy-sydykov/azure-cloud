@@ -19,7 +19,7 @@ resource "azurerm_container_group" "redis" {
 
   container {
     name   = "redis"
-    image  = "mcr.microsoft.com/cbl-mariner/base/redis:latest"
+    image  = "mcr.microsoft.com/cbl-mariner/base/redis:6.2.18-3-cm2.0.20250729"
     cpu    = 1
     memory = 2
 

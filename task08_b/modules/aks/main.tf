@@ -18,6 +18,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count                  = var.default_node_pool_count
     vm_size                     = var.default_node_pool_vm_size
     os_disk_type                = var.default_node_pool_os_disk_type
+    os_disk_size_gb             = 30
     temporary_name_for_rotation = "tempnp"
   }
 

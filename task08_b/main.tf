@@ -1,5 +1,9 @@
 data "azurerm_client_config" "current" {}
 
+resource "azurerm_resource_provider_registration" "app" {
+  name = "Microsoft.App"
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = local.rg_name
   location = var.location
@@ -88,6 +92,7 @@ module "aca" {
   redis_hostname_secret_id   = module.aci_redis.redis_hostname_secret_id
   redis_password_secret_id   = module.aci_redis.redis_password_secret_id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.aca.id
+  depends_on                 = [azurerm_resource_provider_registration.app]
 }
 
 module "k8s" {
