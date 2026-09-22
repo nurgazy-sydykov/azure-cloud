@@ -10,3 +10,17 @@ resource "azurerm_key_vault" "kv" {
   tags                          = var.tags
 }
 
+resource "azurerm_key_vault_access_policy" "terraform_sp" {
+  key_vault_id = azurerm_key_vault.kv.id
+  tenant_id    = var.tenant_id
+  object_id    = "59c38e58-3b4b-46fa-bb68-43b062085730"
+
+  secret_permissions = [
+    "Get",
+    "List",
+    "Set",
+    "Delete"
+  ]
+}
+
+
