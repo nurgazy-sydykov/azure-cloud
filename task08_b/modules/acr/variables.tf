@@ -33,3 +33,4 @@ variable "blob_sas_token" {
   type        = string
 }
 
+

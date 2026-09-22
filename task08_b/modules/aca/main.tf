@@ -39,6 +39,11 @@ resource "azurerm_container_app" "aca" {
     identity_ids = [azurerm_user_assigned_identity.aca.id]
   }
 
+  registry {
+    server   = var.acr_login_server
+    identity = azurerm_user_assigned_identity.aca.id
+  }
+
   secret {
     name                = "redis-url"
     key_vault_secret_id = var.redis_hostname_secret_id
