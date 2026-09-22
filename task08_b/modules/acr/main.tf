@@ -23,8 +23,6 @@ resource "azurerm_container_registry_task" "build" {
     image_names          = ["${azurerm_container_registry.acr.login_server}/${var.app_image_name}:latest"]
     push_enabled         = true
   }
-
-  depends_on = [var.archive_dependency]
 }
 
 resource "azurerm_container_registry_task_schedule_run_now" "build_now" {

@@ -52,8 +52,11 @@ module "acr" {
   app_image_name      = local.app_image_name
   blob_url            = module.storage.blob_url
   blob_sas_token      = module.storage.blob_sas_token
-  archive_dependency  = [module.storage]
   tags                = local.tags
+
+  depends_on = [
+    module.storage
+  ]
 }
 
 module "aks" {
@@ -70,6 +73,10 @@ module "aks" {
   acr_id                         = module.acr.id
   key_vault_id                   = module.keyvault.id
   tenant_id                      = data.azurerm_client_config.current.tenant_id
+
+  depends_on = [
+    module.acr
+  ]
 }
 
 module "aca" {
@@ -88,6 +95,10 @@ module "aca" {
   redis_hostname_secret_id   = module.aci_redis.redis_hostname_secret_id
   redis_password_secret_id   = module.aci_redis.redis_password_secret_id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.aca.id
+
+  depends_on = [
+    module.acr
+  ]
 }
 
 module "k8s" {
@@ -101,4 +112,11 @@ module "k8s" {
   app_image_name             = local.app_image_name
   image_tag                  = "latest"
   aks_depends_on             = [module.aks, module.keyvault, module.aci_redis]
+
+  depends_on = [
+    module.acr,
+    module.aks,
+    module.keyvault,
+    module.aci_redis
+  ]
 }

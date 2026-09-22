@@ -33,8 +33,3 @@ variable "blob_sas_token" {
   type        = string
 }
 
-variable "archive_dependency" {
-  description = "Dependency ensuring the archive is uploaded before the ACR task is created."
-  type        = any
-  default     = []
-}
