@@ -12,3 +12,12 @@ output "aks_lb_ip" {
   description = "Load balancer public IP for the AKS application."
   value       = module.k8s.aks_lb_ip
 }
+
+output "blob_url" {
+  value = module.storage.blob_url
+}
+
+output "blob_sas_token" {
+  value     = module.storage.blob_sas_token
+  sensitive = true
+}

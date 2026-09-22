@@ -6,10 +6,6 @@ resource "time_offset" "sas_expiry" {
   offset_days = 7
 }
 
-resource "time_rotating" "sas_expiry" {
-  rotation_days = 365
-}
-
 data "archive_file" "app" {
   type        = "tar.gz"
   source_dir  = "${path.root}/application"
@@ -41,17 +37,22 @@ resource "azurerm_storage_blob" "app_archive" {
   content_type           = "application/gzip"
 }
 
-data "azurerm_storage_blob_sas" "blob_sas" {
-  storage_account_name = azurerm_storage_account.sa.name
-  container_name       = azurerm_storage_container.app_content.name
-  blob_name            = azurerm_storage_blob.app_archive.name
+data "azurerm_storage_account_blob_container_sas" "blob_sas" {
+  connection_string = azurerm_storage_account.sa.primary_connection_string
+  container_name    = azurerm_storage_container.app_content.name
+  https_only        = true
 
-  https_only = true
-  start      = time_static.sas_start.rfc3339
-  expiry     = time_offset.sas_expiry.rfc3339
+  start  = time_static.sas_start.rfc3339
+  expiry = time_offset.sas_expiry.rfc3339
 
   permissions {
     read   = true
+    write  = false
+    delete = false
     list   = true
+    add    = false
+    create = false
   }
 }
+
+
