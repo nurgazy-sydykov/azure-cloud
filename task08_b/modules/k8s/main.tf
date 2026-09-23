@@ -17,14 +17,17 @@ resource "kubectl_manifest" "deployment" {
     image_tag        = var.image_tag
   })
 
+  depends_on = [
+    var.aks_depends_on,
+    kubectl_manifest.secret_provider_class
+  ]
+
   wait_for {
     field {
       key   = "status.availableReplicas"
       value = "1"
     }
   }
-
-  depends_on = [kubectl_manifest.secret_provider_class]
 }
 
 resource "kubectl_manifest" "service" {
@@ -38,7 +41,10 @@ resource "kubectl_manifest" "service" {
     }
   }
 
-  depends_on = [kubectl_manifest.deployment]
+  depends_on = [
+    kubectl_manifest.deployment,
+    var.aks_depends_on
+  ]
 }
 
 data "kubernetes_service_v1" "app" {
@@ -47,5 +53,8 @@ data "kubernetes_service_v1" "app" {
     namespace = "default"
   }
 
-  depends_on = [kubectl_manifest.service]
+  depends_on = [
+    kubectl_manifest.service,
+    var.aks_depends_on
+  ]
 }
